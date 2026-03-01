@@ -163,7 +163,8 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
   }
 
   // Piston head
-  if (shortName === 'piston_head') {
+  if (shortName === 'piston_head' || shortName === 'piston_arm_collision') {
+    javaName = 'minecraft:piston_head';
     if (bedrockName.includes('sticky')) props.type = 'sticky';
     else if (!props.type) props.type = 'normal';
     if (!props.short) props.short = 'false';
@@ -294,12 +295,17 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
     if (!props.has_book) props.has_book = 'false';
   }
 
-  // Redstone wire: don't force connections
+  // Redstone wire: don't force connections, but default to 'none' for renderer fallback
   if (shortName === 'redstone_wire') {
     if (props.redstone_signal !== undefined) {
       props.power = String(props.redstone_signal);
       delete props.redstone_signal;
     }
+    if (props.east === undefined) props.east = 'none';
+    if (props.north === undefined) props.north = 'none';
+    if (props.south === undefined) props.south = 'none';
+    if (props.west === undefined) props.west = 'none';
+    if (props.power === undefined) props.power = '0';
   }
 
   // ── Step 6: Final cleanup ──
