@@ -1,0 +1,37 @@
+{
+  "name": "bedrock-nbt-converter",
+  "version": "1.0.0",
+  "description": "Convert Bedrock .mcworld / .mcstructure files to Java Structure NBT format",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "bedrock-nbt-converter": "./bin/cli.js"
+  },
+  "files": [
+    "src/",
+    "data/",
+    "bin/"
+  ],
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "minecraft",
+    "bedrock",
+    "java",
+    "nbt",
+    "mcworld",
+    "mcstructure",
+    "converter",
+    "structure"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "leveldb-zlib": "^1.2.0",
+    "prismarine-nbt": "^2.5.0"
+  }
+}
