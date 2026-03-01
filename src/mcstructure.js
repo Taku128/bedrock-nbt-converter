@@ -9,6 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import { mapBlock } from './block-mapping.js';
 import { buildStructureNbt } from './nbt-builder.js';
+import { postProcessBlocks } from './post-process.js';
 
 /**
  * Internal conversion from parsed Bedrock NBT data.
@@ -67,10 +68,13 @@ function convertParsed(root) {
     }
   }
 
+  // Post-process: fix piston extended state based on adjacent piston_heads
+  const processed = postProcessBlocks(javaBlocks, javaPalette);
+
   const nbtBuffer = buildStructureNbt({
     size: [size[0], size[1], size[2]],
-    palette: javaPalette,
-    blocks: javaBlocks
+    palette: processed.palette,
+    blocks: processed.blocks
   });
 
   return {

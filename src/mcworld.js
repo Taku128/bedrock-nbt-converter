@@ -12,6 +12,7 @@ import os from 'os';
 import { parseSubChunk } from './subchunk-parser.js';
 import { mapBlock } from './block-mapping.js';
 import { buildStructureNbt } from './nbt-builder.js';
+import { postProcessBlocks } from './post-process.js';
 
 const TAG_SUBCHUNK_PREFIX = 47;
 
@@ -215,10 +216,13 @@ export async function convertMcworld(inputPath, options = {}) {
     state: b.state
   }));
 
+  // Post-process: fix piston extended state
+  const processed = postProcessBlocks(shiftedBlocks, finalPalette);
+
   const nbtBuffer = buildStructureNbt({
     size: [sizeX, sizeY, sizeZ],
-    palette: finalPalette,
-    blocks: shiftedBlocks
+    palette: processed.palette,
+    blocks: processed.blocks
   });
 
   return {

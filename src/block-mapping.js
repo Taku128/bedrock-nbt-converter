@@ -1,10 +1,10 @@
 /**
- * bedrock-converter/src/block-mapping.js
+ * bedrock-nbt-converter/src/block-mapping.js
  * 
- * Maps Bedrock block names and properties (states) to Java-compatible
- * block names and properties (for Structure NBT).
+ * Maps Bedrock block names and properties to Java-compatible format.
+ * Uses Chunker-derived name mappings as primary lookup, with manual
+ * property conversion rules for block states.
  */
-import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { readFileSync, existsSync } from 'fs';
@@ -12,24 +12,34 @@ import { readFileSync, existsSync } from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Load EasyEdit-Data mapping statically
+// ── Load Chunker-derived mappings ──
+let chunkerNames = {};
+let chunkerFlatten = {};
+try {
+  const p = resolve(__dirname, '..', 'data', 'chunker-mappings.json');
+  if (existsSync(p)) {
+    const d = JSON.parse(readFileSync(p, 'utf8'));
+    chunkerNames = d.names || {};
+    chunkerFlatten = d.flatten || {};
+  }
+} catch (e) { /* ignore */ }
+
+// ── Load EasyEdit-Data augmentation ──
 let easyEditMapping = {};
 try {
-  const mappingPath = resolve(__dirname, '..', 'data', 'bedrock-to-java.json');
-  if (existsSync(mappingPath)) {
-    easyEditMapping = JSON.parse(readFileSync(mappingPath, 'utf8'));
+  const p = resolve(__dirname, '..', 'data', 'bedrock-to-java.json');
+  if (existsSync(p)) {
+    easyEditMapping = JSON.parse(readFileSync(p, 'utf8'));
   }
-} catch (e) {
-  // Silently continue without EasyEdit data
-}
+} catch (e) { /* ignore */ }
 
-const COLORS = [
-  'white', 'orange', 'magenta', 'light_blue', 'yellow', 'lime',
-  'pink', 'gray', 'light_gray', 'cyan', 'purple', 'blue',
-  'brown', 'green', 'red', 'black'
-];
-
-const WOODS = ['oak', 'spruce', 'birch', 'jungle', 'acacia', 'dark_oak', 'mangrove', 'cherry', 'pale_oak'];
+// ── Constants ──
+const FLIP_DIR = { north: 'south', south: 'north', east: 'west', west: 'east' };
+const TRAPDOOR_DIR = ['east', 'west', 'south', 'north'];
+const RAIL_SHAPE = {
+  0: 'north_south', 1: 'east_west', 2: 'ascending_east',
+  3: 'ascending_west', 4: 'ascending_north', 5: 'ascending_south'
+};
 
 /**
  * Map a Bedrock block name + properties to Java-compatible format.
@@ -38,123 +48,278 @@ const WOODS = ['oak', 'spruce', 'birch', 'jungle', 'acacia', 'dark_oak', 'mangro
  * @returns {{ name: string, properties: object }}
  */
 export function mapBlock(bedrockName, bedrockProps = {}) {
-  let name = bedrockName.replace('minecraft:', '');
   const props = { ...bedrockProps };
 
-  // 1. Flatten colors
-  if (props.color && COLORS.includes(props.color)) {
-    if (['concrete', 'wool', 'carpet', 'shulker_box', 'bed', 'stained_glass', 'stained_glass_pane', 'terracotta', 'glazed_terracotta'].includes(name)) {
-      name = `${props.color}_${name}`;
-      delete props.color;
+  // ── Step 1: Normalize namespaced property keys ──
+  const nsKeys = {
+    'minecraft:cardinal_direction': 'cardinal_direction',
+    'minecraft:facing_direction': 'mc_facing_direction',
+    'minecraft:vertical_half': 'vertical_half',
+    'minecraft:block_face': 'block_face',
+  };
+  for (const [ns, local] of Object.entries(nsKeys)) {
+    if (props[ns] !== undefined) { props[local] = props[ns]; delete props[ns]; }
+  }
+
+  // ── Step 2: Resolve Java name via Chunker mappings ──
+  let javaName = bedrockName;
+
+  // 2a. Check flatten (conditional) mappings first
+  const flattenRules = chunkerFlatten[bedrockName];
+  if (flattenRules) {
+    for (const [stateKey, valueMap] of Object.entries(flattenRules)) {
+      const propVal = props[stateKey];
+      if (propVal !== undefined) {
+        const resolved = valueMap[String(propVal)];
+        if (resolved) {
+          javaName = resolved;
+          delete props[stateKey]; // consumed by name resolution
+          break;
+        }
+      }
     }
   }
 
-  // 2. Flatten wood types
-  if (['planks', 'leaves', 'sapling', 'log', 'wood', 'sign', 'fence', 'fence_gate', 'door', 'trapdoor', 'pressure_plate', 'button'].includes(name)) {
-    const woodProp = props.wood_type || props.old_log_type || props.new_log_type;
-    if (woodProp && WOODS.includes(woodProp)) {
-      name = `${woodProp}_${name}`;
-      delete props.wood_type;
-      delete props.old_log_type;
-      delete props.new_log_type;
-    }
+  // 2b. If not resolved by flatten, try simple name lookup
+  if (javaName === bedrockName && chunkerNames[bedrockName]) {
+    javaName = chunkerNames[bedrockName];
   }
 
-  // 3. Handle double slabs
-  if (name.includes('double_slab') || name === 'double_stone_block_slab') {
-    name = name.replace('double_', '');
-    props.type = 'double';
-  }
+  // Short name for property logic
+  const shortName = javaName.replace('minecraft:', '');
 
-  // 4. Handle dirt types
-  if (name === 'dirt' && props.dirt_type) {
-    if (props.dirt_type === 'coarse') name = 'coarse_dirt';
-    delete props.dirt_type;
-  }
+  // ── Step 3: Convert Bedrock properties to Java properties ──
 
-  // 5. Handle stone types
-  if (name === 'stone' && props.stone_type) {
-    if (props.stone_type !== 'stone') name = props.stone_type;
-    delete props.stone_type;
-  }
-
-  // 6. Handle facing / orientation
+  // facing_direction (int 0-5) → facing
   if (props.facing_direction !== undefined) {
-    const facingMap = ['down', 'up', 'north', 'south', 'west', 'east'];
-    if (typeof props.facing_direction === 'number') {
-      props.facing = facingMap[Math.min(5, Math.max(0, props.facing_direction))];
-    } else {
-      props.facing = props.facing_direction;
-    }
+    const fMap = ['down', 'up', 'north', 'south', 'west', 'east'];
+    props.facing = typeof props.facing_direction === 'number'
+      ? fMap[Math.min(5, Math.max(0, props.facing_direction))]
+      : String(props.facing_direction);
     delete props.facing_direction;
   }
 
+  // minecraft:facing_direction (string) → facing
+  if (props.mc_facing_direction !== undefined) {
+    props.facing = String(props.mc_facing_direction);
+    delete props.mc_facing_direction;
+  }
+
+  // cardinal_direction → facing
+  if (props.cardinal_direction !== undefined) {
+    props.facing = String(props.cardinal_direction);
+    delete props.cardinal_direction;
+  }
+
+  // pillar_axis → axis
   if (props.pillar_axis !== undefined) {
-    props.axis = props.pillar_axis;
-    delete props.pillar_axis;
+    props.axis = props.pillar_axis; delete props.pillar_axis;
   }
 
-  // Direct name changes
-  const directNameChanges = {
-    'grass': 'grass_block',
-    'tallgrass': 'grass',
-    'waterlily': 'lily_pad',
-    'reeds': 'sugar_cane',
-    'lit_pumpkin': 'jack_o_lantern',
-    'unpowered_repeater': 'repeater',
-    'powered_repeater': 'repeater',
-    'unpowered_comparator': 'comparator',
-    'powered_comparator': 'comparator',
-    'lit_redstone_ore': 'redstone_ore',
-    'lit_redstone_lamp': 'redstone_lamp'
-  };
-
-  if (directNameChanges[name]) {
-    name = directNameChanges[name];
+  // vertical_half → type (slabs)
+  if (props.vertical_half !== undefined) {
+    props.type = props.vertical_half === 'top' ? 'top' : 'bottom';
+    delete props.vertical_half;
   }
 
-  const javaName = 'minecraft:' + name;
+  // ── Step 4: Block-specific property conversions ──
 
-  // EasyEdit-Data augmentation
+  // Redstone torch: wall vs standing, direction INVERTED
+  if (shortName === 'redstone_wall_torch' || shortName === 'redstone_torch') {
+    const torchDir = props.torch_facing_direction;
+    delete props.torch_facing_direction;
+    const isLit = !bedrockName.includes('unlit');
+
+    if (torchDir && torchDir !== 'top' && torchDir !== 'unknown') {
+      javaName = 'minecraft:redstone_wall_torch';
+      props.facing = FLIP_DIR[torchDir] || torchDir;
+    } else {
+      javaName = 'minecraft:redstone_torch';
+    }
+    props.lit = isLit ? 'true' : 'false';
+  }
+
+  // Regular torch: wall vs standing
+  if (shortName === 'wall_torch' || shortName === 'torch') {
+    const torchDir = props.torch_facing_direction;
+    delete props.torch_facing_direction;
+
+    if (torchDir && torchDir !== 'top' && torchDir !== 'unknown') {
+      javaName = 'minecraft:wall_torch';
+      props.facing = FLIP_DIR[torchDir] || torchDir;
+    } else {
+      javaName = 'minecraft:torch';
+    }
+  }
+
+  // Soul torch: wall vs standing
+  if (shortName === 'soul_wall_torch' || shortName === 'soul_torch') {
+    const torchDir = props.torch_facing_direction;
+    delete props.torch_facing_direction;
+
+    if (torchDir && torchDir !== 'top' && torchDir !== 'unknown') {
+      javaName = 'minecraft:soul_wall_torch';
+      props.facing = FLIP_DIR[torchDir] || torchDir;
+    } else {
+      javaName = 'minecraft:soul_torch';
+    }
+  }
+
+  // Piston head
+  if (shortName === 'piston_head') {
+    if (bedrockName.includes('sticky')) props.type = 'sticky';
+    else if (!props.type) props.type = 'normal';
+    if (!props.short) props.short = 'false';
+  }
+
+  // Piston / Sticky Piston
+  if (shortName === 'piston' || shortName === 'sticky_piston') {
+    if (props.extended === undefined) props.extended = 'false';
+  }
+
+  // Comparator
+  if (shortName === 'comparator') {
+    if (props.output_subtract_bit !== undefined) {
+      props.mode = (props.output_subtract_bit == 1) ? 'subtract' : 'compare';
+      delete props.output_subtract_bit;
+    } else if (!props.mode) props.mode = 'compare';
+    if (props.output_lit_bit !== undefined) {
+      props.powered = (props.output_lit_bit == 1) ? 'true' : 'false';
+      delete props.output_lit_bit;
+    } else {
+      props.powered = (bedrockName === 'minecraft:powered_comparator') ? 'true' : 'false';
+    }
+  }
+
+  // Repeater
+  if (shortName === 'repeater') {
+    props.powered = (bedrockName === 'minecraft:powered_repeater') ? 'true' : 'false';
+    if (props.repeater_delay !== undefined) {
+      props.delay = String(Number(props.repeater_delay) + 1);
+      delete props.repeater_delay;
+    } else if (!props.delay) props.delay = '1';
+    if (!props.locked) props.locked = 'false';
+  }
+
+  // Observer
+  if (shortName === 'observer') {
+    if (props.powered_bit !== undefined) {
+      props.powered = (props.powered_bit == 1) ? 'true' : 'false';
+      delete props.powered_bit;
+    } else if (props.powered === undefined) props.powered = 'false';
+  }
+
+  // Button
+  if (shortName.includes('button')) {
+    if (props.button_pressed_bit !== undefined) {
+      props.powered = (props.button_pressed_bit == 1) ? 'true' : 'false';
+      delete props.button_pressed_bit;
+    }
+    if (props.facing) {
+      const f = props.facing;
+      if (f === 'down') { props.face = 'ceiling'; props.facing = 'north'; }
+      else if (f === 'up') { props.face = 'floor'; props.facing = 'north'; }
+      else props.face = 'wall';
+    }
+  }
+
+  // Barrel
+  if (shortName === 'barrel') {
+    if (props.open_bit !== undefined) {
+      props.open = (props.open_bit == 1) ? 'true' : 'false';
+      delete props.open_bit;
+    } else if (!props.open) props.open = 'false';
+  }
+
+  // Dropper / Dispenser
+  if (shortName === 'dropper' || shortName === 'dispenser') {
+    if (props.triggered_bit !== undefined) {
+      props.triggered = (props.triggered_bit == 1) ? 'true' : 'false';
+      delete props.triggered_bit;
+    }
+  }
+
+  // Hopper
+  if (shortName === 'hopper') {
+    if (props.toggle_bit !== undefined) {
+      props.enabled = (props.toggle_bit == 0) ? 'true' : 'false';
+      delete props.toggle_bit;
+    }
+  }
+
+  // Trapdoor
+  if (shortName.includes('trapdoor')) {
+    if (props.direction !== undefined) {
+      props.facing = TRAPDOOR_DIR[props.direction] || 'north';
+      delete props.direction;
+    }
+    if (props.upside_down_bit !== undefined) {
+      props.half = (props.upside_down_bit == 1) ? 'top' : 'bottom';
+      delete props.upside_down_bit;
+    }
+    if (props.open_bit !== undefined) {
+      props.open = (props.open_bit == 1) ? 'true' : 'false';
+      delete props.open_bit;
+    }
+    if (!props.open) props.open = 'false';
+    if (!props.half) props.half = 'bottom';
+    if (!props.waterlogged) props.waterlogged = 'false';
+    if (props.powered === undefined) props.powered = 'false';
+  }
+
+  // Powered rail / activator rail / detector rail
+  if (shortName === 'powered_rail' || shortName === 'activator_rail' || shortName === 'detector_rail') {
+    if (props.rail_direction !== undefined) {
+      props.shape = RAIL_SHAPE[props.rail_direction] || 'north_south';
+      delete props.rail_direction;
+    }
+    if (props.rail_data_bit !== undefined) {
+      props.powered = (props.rail_data_bit == 1) ? 'true' : 'false';
+      delete props.rail_data_bit;
+    }
+    if (props.powered === undefined) props.powered = 'false';
+    if (!props.waterlogged) props.waterlogged = 'false';
+  }
+
+  // Lectern
+  if (shortName === 'lectern') {
+    if (props.powered_bit !== undefined) {
+      props.has_book = (props.powered_bit == 1) ? 'true' : 'false';
+      delete props.powered_bit;
+    }
+    if (props.powered === undefined) props.powered = 'false';
+    if (!props.has_book) props.has_book = 'false';
+  }
+
+  // Redstone wire: don't force connections
+  if (shortName === 'redstone_wire') {
+    if (props.redstone_signal !== undefined) {
+      props.power = String(props.redstone_signal);
+      delete props.redstone_signal;
+    }
+  }
+
+  // ── Step 5: EasyEdit-Data augmentation ──
   const eeMap = easyEditMapping[javaName];
   if (eeMap) {
     if (eeMap.renames) {
-      for (const [oldKey, newKey] of Object.entries(eeMap.renames)) {
-        if (props[oldKey] !== undefined) {
-          props[newKey] = String(props[oldKey]);
-          delete props[oldKey];
-        }
+      for (const [oldK, newK] of Object.entries(eeMap.renames)) {
+        if (props[oldK] !== undefined) { props[newK] = String(props[oldK]); delete props[oldK]; }
       }
     }
     if (eeMap.defaults) {
-      for (const [key, val] of Object.entries(eeMap.defaults)) {
-        if (props[key] === undefined) {
-          props[key] = String(val);
-        }
+      for (const [k, v] of Object.entries(eeMap.defaults)) {
+        if (props[k] === undefined) props[k] = String(v);
       }
     }
   }
 
-  // Specific Java fixes
-  if (javaName === 'minecraft:repeater') {
-    if (bedrockName.includes('powered')) props.powered = 'true';
-    if (props.repeater_delay !== undefined) {
-      props.delay = String(props.repeater_delay + 1);
-      delete props.repeater_delay;
-    }
-  }
-
-  // Ensure all properties are strings
+  // ── Step 6: Final cleanup ──
   const stringProps = {};
   for (const [k, v] of Object.entries(props)) {
-    if (k.includes('bit') || k.includes('update')) continue;
-    if (typeof v === 'boolean') {
-      stringProps[k] = v ? 'true' : 'false';
-    } else if (typeof v === 'number' && (v === 0 || v === 1) && (k === 'powered' || k === 'open' || k === 'waterlogged')) {
-      stringProps[k] = v === 1 ? 'true' : 'false';
-    } else {
-      stringProps[k] = String(v);
-    }
+    if (k.includes('update') || k === 'age_bit' || k === 'age') continue;
+    if (k.startsWith('minecraft:')) continue;
+    stringProps[k] = typeof v === 'boolean' ? (v ? 'true' : 'false') : String(v);
   }
 
   return { name: javaName, properties: stringProps };
