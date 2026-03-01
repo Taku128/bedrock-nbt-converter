@@ -74,12 +74,10 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
   if (!javaName) {
     if (blockData.names && blockData.names[bedrockName]) {
       javaName = blockData.names[bedrockName];
+    } else { // 2c. Default fallback: use bedrock name minus prefix, re-add minecraft:
+      javaName = bedrockName.replace('minecraft:', '');
+      javaName = 'minecraft:' + javaName;
     }
-  }
-
-  // 2c. Default fallback: use bedrock name minus prefix
-  if (!javaName) {
-    javaName = bedrockName.replace('minecraft:', '');
   }
 
   // Short name for property logic
