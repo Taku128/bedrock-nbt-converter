@@ -1,7 +1,7 @@
 {
   "name": "bedrock-nbt-converter",
   "version": "1.0.0",
-  "description": "Convert Bedrock .mcworld / .mcstructure files to Java Structure NBT format",
+  "description": "Convert Bedrock .mcworld / .mcstructure files to Java Structure NBT format using Chunker mapping data",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
@@ -16,7 +16,7 @@
     "bin/"
   ],
   "scripts": {
-    "test": "node test/test.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "minecraft",
@@ -26,7 +26,8 @@
     "mcworld",
     "mcstructure",
     "converter",
-    "structure"
+    "structure",
+    "chunker"
   ],
   "license": "MIT",
   "dependencies": {

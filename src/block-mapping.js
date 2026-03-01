@@ -13,25 +13,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // ── Load Chunker-derived mappings ──
-let chunkerNames = {};
-let chunkerFlatten = {};
+let blockData = {};
 try {
   const p = resolve(__dirname, '..', 'data', 'chunker-mappings.json');
   if (existsSync(p)) {
-    const d = JSON.parse(readFileSync(p, 'utf8'));
-    chunkerNames = d.names || {};
-    chunkerFlatten = d.flatten || {};
+    blockData = JSON.parse(readFileSync(p, 'utf8'));
   }
-} catch (e) { /* ignore */ }
-
-// ── Load EasyEdit-Data augmentation ──
-let easyEditMapping = {};
-try {
-  const p = resolve(__dirname, '..', 'data', 'bedrock-to-java.json');
-  if (existsSync(p)) {
-    easyEditMapping = JSON.parse(readFileSync(p, 'utf8'));
-  }
-} catch (e) { /* ignore */ }
+} catch (e) {
+  // Ignore
+}
 
 // ── Constants ──
 const FLIP_DIR = { north: 'south', south: 'north', east: 'west', west: 'east' };
@@ -62,10 +52,10 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
   }
 
   // ── Step 2: Resolve Java name via Chunker mappings ──
-  let javaName = bedrockName;
+  let javaName = null; // Initialize as null to clearly indicate if it's resolved
 
   // 2a. Check flatten (conditional) mappings first
-  const flattenRules = chunkerFlatten[bedrockName];
+  const flattenRules = blockData.flatten && blockData.flatten[bedrockName];
   if (flattenRules) {
     for (const [stateKey, valueMap] of Object.entries(flattenRules)) {
       const propVal = props[stateKey];
@@ -81,8 +71,15 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
   }
 
   // 2b. If not resolved by flatten, try simple name lookup
-  if (javaName === bedrockName && chunkerNames[bedrockName]) {
-    javaName = chunkerNames[bedrockName];
+  if (!javaName) {
+    if (blockData.names && blockData.names[bedrockName]) {
+      javaName = blockData.names[bedrockName];
+    }
+  }
+
+  // 2c. Default fallback: use bedrock name minus prefix
+  if (!javaName) {
+    javaName = bedrockName.replace('minecraft:', '');
   }
 
   // Short name for property logic
