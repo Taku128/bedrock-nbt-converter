@@ -104,6 +104,10 @@ npx bedrock-nbt-converter --help
 - [leveldb-zlib](https://www.npmjs.com/package/leveldb-zlib) - Bedrock LevelDB 読み取り
 - [prismarine-nbt](https://www.npmjs.com/package/prismarine-nbt) - NBT パース / 書き込み
 
-## ライセンス
+## License
 
-MIT
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Credits & Acknowledgements
+
+This project's block mapping logic and JSON lookup data (`data/chunker-mappings.json`) are heavily derived from the source code of the [Chunker](https://github.com/HiveGamesOSS/Chunker) project by Hive Games, which is an actively maintained Bedrock & Java conversion tool. The extracted data is distributed under the terms of Chunker's MIT License. We extend our sincere gratitude to Hive Games for making their comprehensive mapping data open source.
