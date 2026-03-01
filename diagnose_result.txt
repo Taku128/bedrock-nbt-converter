@@ -1,0 +1,489 @@
+﻿=== PALETTE ENTRIES (piston/redstone) ===
+  [4] minecraft:sticky_piston { extended=false, facing=north }
+  [5] minecraft:piston_head { facing=north, short=false, type=sticky }
+  [6] minecraft:observer { facing=up, powered=false }
+  [7] minecraft:redstone_wire { east=none, north=none, power=0, south=none, west=none }
+  [8] minecraft:redstone_wire { east=none, north=none, power=14, south=none, west=none }
+  [9] minecraft:redstone_block {  }
+  [10] minecraft:redstone_wire { east=none, north=none, power=15, south=none, west=none }
+  [15] minecraft:sticky_piston { extended=false, facing=down }
+  [16] minecraft:piston_head { facing=south, short=false, type=normal }
+  [17] minecraft:piston { extended=false, facing=south }
+  [18] minecraft:redstone_wall_torch { facing=south, lit=false }
+  [21] minecraft:sticky_piston { extended=false, facing=west }
+  [22] minecraft:redstone_wire { east=none, north=none, power=13, south=none, west=none }
+  [23] minecraft:repeater { delay=4, facing=north, locked=false, powered=true }
+  [45] minecraft:observer { facing=north, powered=false }
+  [46] minecraft:redstone_wall_torch { facing=west, lit=true }
+  [48] minecraft:repeater { delay=1, facing=north, locked=false, powered=false }
+  [50] minecraft:redstone_wall_torch { facing=south, lit=true }
+  [51] minecraft:piston { extended=false, facing=down }
+  [52] minecraft:sticky_piston { extended=false, facing=up }
+  [53] minecraft:piston_head { facing=west, short=false, type=sticky }
+  [54] minecraft:redstone_wall_torch { facing=west, lit=false }
+  [55] minecraft:observer { facing=down, powered=false }
+  [58] minecraft:observer { facing=west, powered=false }
+  [59] minecraft:repeater { delay=1, facing=west, locked=false, powered=false }
+  [60] minecraft:comparator { facing=west, mode=compare, powered=false }
+  [62] minecraft:redstone_wire { east=none, north=none, power=12, south=none, west=none }
+  [63] minecraft:repeater { delay=1, facing=east, locked=false, powered=false }
+  [64] minecraft:piston { extended=false, facing=north }
+  [65] minecraft:redstone_torch { lit=true }
+  [66] minecraft:piston_head { facing=down, short=false, type=sticky }
+  [67] minecraft:comparator { facing=west, mode=compare, powered=true }
+  [68] minecraft:redstone_torch { lit=false }
+  [69] minecraft:comparator { facing=west, mode=subtract, powered=false }
+  [70] minecraft:observer { facing=east, powered=false }
+  [71] minecraft:piston { extended=false, facing=east }
+  [72] minecraft:comparator { facing=north, mode=subtract, powered=false }
+  [74] minecraft:redstone_wall_torch { facing=north, lit=true }
+  [75] minecraft:comparator { facing=north, mode=compare, powered=false }
+  [76] minecraft:comparator { facing=north, mode=compare, powered=true }
+  [77] minecraft:redstone_wire { east=none, north=none, power=1, south=none, west=none }
+  [78] minecraft:comparator { facing=north, mode=subtract, powered=true }
+  [79] minecraft:redstone_wire { east=none, north=none, power=2, south=none, west=none }
+  [80] minecraft:redstone_wire { east=none, north=none, power=3, south=none, west=none }
+  [81] minecraft:redstone_wire { east=none, north=none, power=4, south=none, west=none }
+  [82] minecraft:redstone_wire { east=none, north=none, power=5, south=none, west=none }
+  [83] minecraft:redstone_wire { east=none, north=none, power=6, south=none, west=none }
+  [84] minecraft:redstone_wire { east=none, north=none, power=7, south=none, west=none }
+  [85] minecraft:redstone_wire { east=none, north=none, power=8, south=none, west=none }
+  [86] minecraft:redstone_wire { east=none, north=none, power=9, south=none, west=none }
+  [87] minecraft:redstone_wire { east=none, north=none, power=10, south=none, west=none }
+  [88] minecraft:redstone_wire { east=none, north=none, power=11, south=none, west=none }
+  [89] minecraft:comparator { facing=east, mode=compare, powered=false }
+  [90] minecraft:redstone_wall_torch { facing=east, lit=false }
+  [91] minecraft:redstone_wall_torch { facing=north, lit=false }
+  [92] minecraft:repeater { delay=1, facing=west, locked=false, powered=true }
+  [97] minecraft:comparator { facing=south, mode=subtract, powered=false }
+  [98] minecraft:repeater { delay=2, facing=west, locked=false, powered=true }
+  [99] minecraft:comparator { facing=east, mode=subtract, powered=false }
+  [100] minecraft:repeater { delay=2, facing=west, locked=false, powered=false }
+  [101] minecraft:comparator { facing=east, mode=subtract, powered=true }
+  [106] minecraft:observer { facing=south, powered=false }
+  [107] minecraft:comparator { facing=south, mode=compare, powered=false }
+  [109] minecraft:repeater { delay=1, facing=east, locked=false, powered=true }
+  [112] minecraft:sticky_piston { extended=false, facing=east }
+  [118] minecraft:comparator { facing=east, mode=compare, powered=true }
+  [128] minecraft:sticky_piston { extended=true, facing=down }
+
+=== PISTON BLOCKS (with positions) ===
+  pos=[0,6,4] minecraft:sticky_piston { extended=false, facing=north }
+  pos=[0,6,5] minecraft:piston_head { facing=north, short=false, type=sticky }
+  pos=[0,9,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,9,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,9,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,10,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,13,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,17,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,17,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,17,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,18,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,21,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,21,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,21,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,22,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,25,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,25,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,25,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,26,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,29,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,33,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,37,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,37,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,37,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,38,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,41,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,41,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,41,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,42,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,45,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,49,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,49,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,49,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,50,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,53,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,53,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,53,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,54,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,57,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,61,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,65,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,69,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,73,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,77,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,77,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,77,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,78,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,81,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,81,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,81,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,82,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,85,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[0,89,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,89,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,89,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,90,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,93,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,93,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,93,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,94,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,97,1] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[0,97,2] minecraft:piston_head { facing=south, short=false, type=normal }
+  pos=[0,97,3] minecraft:piston { extended=false, facing=south }
+  pos=[0,98,7] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[0,101,1] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[1,10,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,10,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,10,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,18,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,18,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,18,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,22,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,22,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,22,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,26,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,26,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,26,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,38,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,38,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,38,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,42,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,42,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,42,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,50,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,50,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,50,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,54,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,54,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,54,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,78,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,78,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,78,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,82,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,82,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,82,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,90,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,90,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,90,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,94,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,94,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,94,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,98,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,98,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[1,98,7] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[1,102,2] minecraft:piston { extended=false, facing=down }
+  pos=[1,102,4] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[2,9,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,10,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,11,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,13,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,18,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,19,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,21,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,23,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[2,25,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,26,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,27,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,29,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,38,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,39,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,41,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,42,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,43,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,45,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,50,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,51,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,53,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,54,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,55,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,57,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,78,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,79,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,81,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,82,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,83,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,85,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,90,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,91,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,93,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,94,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,95,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,97,1] minecraft:piston { extended=false, facing=north }
+  pos=[2,98,5] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[2,99,5] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[2,101,1] minecraft:piston { extended=false, facing=north }
+  pos=[3,6,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,7,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,9,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,10,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,11,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,17,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,18,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,19,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,21,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,22,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,23,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,25,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,26,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,27,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,37,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,38,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,39,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,41,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,42,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,43,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,49,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,50,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,51,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,53,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,54,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,55,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,77,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,78,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,79,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,81,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,82,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,83,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,89,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,90,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,91,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,93,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,94,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,95,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,97,6] minecraft:piston { extended=false, facing=down }
+  pos=[3,98,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[3,99,1] minecraft:piston { extended=false, facing=east }
+  pos=[3,102,0] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[5,6,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,10,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,18,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,21,0] minecraft:piston_head { facing=down, short=false, type=sticky }
+  pos=[5,22,0] minecraft:sticky_piston { extended=true, facing=down }
+  pos=[5,26,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,38,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,42,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,50,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,54,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,78,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,82,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,90,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,94,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,98,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[5,102,0] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,2,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,4,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,4,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,5,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,5,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,6,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,6,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,8,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,8,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,9,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,9,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,10,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,10,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,12,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,14,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,16,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,16,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,17,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,17,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,18,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,18,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,20,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,20,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,21,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,21,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,22,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,22,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,24,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,24,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,25,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,25,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,26,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,26,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,28,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,30,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,32,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,34,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,36,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,36,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,37,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,37,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,38,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,38,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,40,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,40,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,41,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,41,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,42,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,42,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,44,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,46,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,48,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,48,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,49,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,49,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,50,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,50,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,52,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,52,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,53,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,53,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,54,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,54,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,56,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,58,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,60,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,62,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,64,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,66,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,68,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,70,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,72,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,74,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,76,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,76,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,77,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,77,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,78,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,78,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,80,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,80,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,81,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,81,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,82,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,82,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,84,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,86,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,88,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,88,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,89,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,89,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,90,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,90,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,92,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,92,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,93,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,93,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,94,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,94,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,96,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,96,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,97,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,97,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,98,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,98,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,100,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,100,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[7,101,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,101,2] minecraft:sticky_piston { extended=false, facing=east }
+  pos=[7,102,1] minecraft:sticky_piston { extended=false, facing=west }
+  pos=[7,102,3] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[7,104,3] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[8,4,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,5,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,6,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,8,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,9,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,10,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,16,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,17,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,18,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,24,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,25,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,26,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,36,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,37,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,38,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,40,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,41,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,42,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,48,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,49,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,50,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,52,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,53,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,54,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,76,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,77,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,78,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,80,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,81,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,82,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,88,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,89,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,90,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,92,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,93,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,94,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,96,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,97,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,98,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,100,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,101,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[8,102,1] minecraft:piston_head { facing=west, short=false, type=sticky }
+  pos=[9,4,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,6,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,8,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,10,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,12,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,14,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,16,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,18,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,20,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,22,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,24,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,26,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,28,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,30,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,32,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,34,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,36,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,38,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,40,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,42,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,44,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,46,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,48,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,50,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,52,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,54,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,56,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,58,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,60,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,62,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,64,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,66,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,68,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,70,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,72,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,74,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,76,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,78,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,80,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,82,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,84,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,86,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,88,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,90,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,92,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,94,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,96,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,98,5] minecraft:sticky_piston { extended=false, facing=down }
+  pos=[9,100,5] minecraft:sticky_piston { extended=false, facing=up }
+  pos=[9,102,5] minecraft:sticky_piston { extended=false, facing=down }
+
+=== REDSTONE_WIRE BLOCKS (first 10) ===
+  pos=[0,7,0] minecraft:redstone_wire { east=none, north=none, power=0, south=none, west=none }
+  pos=[0,7,3] minecraft:redstone_wire { east=none, north=none, power=14, south=none, west=none }
+  pos=[0,8,2] minecraft:redstone_wire { east=none, north=none, power=15, south=none, west=none }
+  pos=[0,9,5] minecraft:redstone_wire { east=none, north=none, power=0, south=none, west=none }
+  pos=[0,10,1] minecraft:redstone_wire { east=none, north=none, power=0, south=none, west=none }
+  pos=[0,11,0] minecraft:redstone_wire { east=none, north=none, power=0, south=none, west=none }
+  pos=[0,11,3] minecraft:redstone_wire { east=none, north=none, power=14, south=none, west=none }
+  pos=[0,11,4] minecraft:redstone_wire { east=none, north=none, power=13, south=none, west=none }
+  pos=[0,12,2] minecraft:redstone_wire { east=none, north=none, power=15, south=none, west=none }
+  pos=[0,14,1] minecraft:redstone_wire { east=none, north=none, power=0, south=none, west=none }

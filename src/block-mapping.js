@@ -170,11 +170,17 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
     if (bedrockName.includes('sticky')) props.type = 'sticky';
     else if (!props.type) props.type = 'normal';
     if (!props.short) props.short = 'false';
+    if (['north', 'south', 'east', 'west'].includes(props.facing)) {
+      props.facing = FLIP_DIR[props.facing];
+    }
   }
 
   // Piston / Sticky Piston
   if (shortName === 'piston' || shortName === 'sticky_piston') {
     if (props.extended === undefined) props.extended = 'false';
+    if (['north', 'south', 'east', 'west'].includes(props.facing)) {
+      props.facing = FLIP_DIR[props.facing];
+    }
   }
 
   // Comparator
