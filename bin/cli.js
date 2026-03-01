@@ -19,7 +19,7 @@
 import fs from 'fs';
 import path from 'path';
 import { convertMcworld } from '../src/mcworld.js';
-import { convertMcstructure } from '../src/mcstructure.js';
+import { convertMcstructureBuffer } from '../src/mcstructure.js';
 
 function showHelp() {
   console.log(`
@@ -109,7 +109,8 @@ async function main() {
       dimension: opts.dimension
     });
   } else {
-    result = await convertMcstructure(inputPath);
+    const rawData = fs.readFileSync(inputPath);
+    result = await convertMcstructureBuffer(rawData);
   }
 
   const outputPath = path.resolve(opts.output);

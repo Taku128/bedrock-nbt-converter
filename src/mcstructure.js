@@ -4,9 +4,7 @@
  * Convert a Bedrock .mcstructure file to Java Structure NBT.
  * Reads the Bedrock Little Endian NBT structure directly.
  */
-import nbt from 'prismarine-nbt';
-import fs from 'fs';
-import path from 'path';
+import { parse } from 'prismarine-nbt';
 import { mapBlock } from './block-mapping.js';
 import { buildStructureNbt } from './nbt-builder.js';
 import { postProcessBlocks } from './post-process.js';
@@ -85,19 +83,7 @@ function convertParsed(root) {
   };
 }
 
-/**
- * Convert a .mcstructure file to Java Structure NBT.
- * @param {string} inputPath - Path to .mcstructure file
- * @returns {Promise<{nbt: Buffer, size: number[], blockCount: number, paletteCount: number}>}
- */
-export async function convertMcstructure(inputPath) {
-  const filePath = path.resolve(inputPath);
-  if (!fs.existsSync(filePath)) throw new Error(`File not found: ${filePath}`);
 
-  const rawData = fs.readFileSync(filePath);
-  const parsed = await nbt.parse(rawData);
-  return convertParsed(parsed.parsed.value);
-}
 
 /**
  * Convert a .mcstructure buffer to Java Structure NBT.
@@ -106,7 +92,7 @@ export async function convertMcstructure(inputPath) {
  * @returns {Promise<{nbt: Buffer, size: number[], blockCount: number, paletteCount: number}>}
  */
 export async function convertMcstructureBuffer(buffer) {
-  const buf = Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
-  const parsed = await nbt.parse(buf);
+  const buf = typeof Buffer !== 'undefined' && Buffer.isBuffer(buffer) ? buffer : (buffer instanceof Uint8Array ? Buffer.from(buffer) : buffer);
+  const parsed = await parse(buf);
   return convertParsed(parsed.parsed.value);
 }

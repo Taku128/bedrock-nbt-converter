@@ -29,13 +29,13 @@ jobs:
       - name: Check for changes
         id: check
         run: |
-          git diff --quiet data/chunker-mappings.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet data/chunker-mappings.js && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push
         if: steps.check.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/chunker-mappings.json
+          git add data/chunker-mappings.js
           git commit -m "chore: update block mappings from Chunker $(date -u +%Y-%m-%d)"
           git push

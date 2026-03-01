@@ -1,5 +1,7 @@
 // bedrock-nbt-converter/src/post-process.js
 
+import blockData from '../data/chunker-mappings.js';
+
 const DIR_OFFSETS = {
   'down':  [0, -1, 0],
   'up':    [0, 1, 0],
@@ -9,23 +11,7 @@ const DIR_OFFSETS = {
   'east':  [1, 0, 0]
 };
 
-import { readFileSync, existsSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-let REDSTONE_CONNECTABLES = new Set();
-try {
-  const p = resolve(__dirname, '..', 'data', 'chunker-mappings.json');
-  if (existsSync(p)) {
-    const d = JSON.parse(readFileSync(p, 'utf8'));
-    if (d.redstoneConnectables) {
-      REDSTONE_CONNECTABLES = new Set(d.redstoneConnectables);
-    }
-  }
-} catch (e) { /* ignore */ }
+const REDSTONE_CONNECTABLES = new Set(blockData.redstoneConnectables || []);
 
 function isRedstoneConnectable(name, props, dx, dz) {
   if (name === 'minecraft:redstone_wire') return true;

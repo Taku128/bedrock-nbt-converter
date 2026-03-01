@@ -1,8 +1,11 @@
-{
+// Auto-generated from Chunker mappings
+// Date: 2026-03-01T15:28:21.855Z
+
+export default {
   "_meta": {
     "source": "HiveGamesOSS/Chunker",
     "file": "BedrockBlockIdentifierResolver.java",
-    "generated": "2026-03-01T13:54:03.728Z",
+    "generated": "2026-03-01T15:28:21.854Z",
     "description": "Bedrock → Java block name mappings extracted from Chunker source"
   },
   "names": {
@@ -908,4 +911,4 @@
     "minecraft:spruce_shelf",
     "minecraft:warped_shelf"
   ]
-}
+};

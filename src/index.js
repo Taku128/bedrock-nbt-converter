@@ -16,7 +16,5 @@
  * });
  * fs.writeFileSync('region.nbt', world.nbt);
  */
-
-export { convertMcworld } from './mcworld.js';
-export { convertMcstructure, convertMcstructureBuffer } from './mcstructure.js';
+export { convertMcstructureBuffer as convertMcstructure } from './mcstructure.js';
 export { mapBlock } from './block-mapping.js';

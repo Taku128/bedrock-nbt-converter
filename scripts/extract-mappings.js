@@ -142,15 +142,18 @@ const output = {
   redstoneConnectables: redstoneConnectables
 };
 
-const outputPath = path.resolve('data/chunker-mappings.json');
-fs.writeFileSync(outputPath, JSON.stringify(output, null, 2), 'utf8');
+const outputPath = path.resolve('data/chunker-mappings.js');
+const filePrefix = `// Auto-generated from Chunker mappings
+// Date: ${new Date().toISOString()}
 
-const simpleCount = Object.keys(simpleMappings).length;
-const condCount = Object.keys(conditionalMappings).length;
-const totalCond = Object.values(conditionalMappings).reduce((sum, v) => 
+export default `;
+
+fs.writeFileSync(outputPath, filePrefix + JSON.stringify(output, null, 2) + ';\n');
+
+const totalVariants = Object.values(conditionalMappings).reduce((sum, v) => 
   sum + Object.values(v).reduce((s, vv) => s + Object.keys(vv).length, 0), 0);
 
-console.log(`✅ Extracted mappings from Chunker:`);
-console.log(`   Simple name changes: ${simpleCount}`);
-console.log(`   Conditional blocks: ${condCount} (${totalCond} total variants)`);
-console.log(`   Output: ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+console.log(`✅ Extracted mappings from Chunker:
+   Simple name changes: ${Object.keys(simpleMappings).length}
+   Conditional blocks: ${Object.keys(conditionalMappings).length} (${totalVariants} total variants)
+   Output: ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);

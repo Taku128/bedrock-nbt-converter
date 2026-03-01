@@ -5,23 +5,7 @@
  * Uses Chunker-derived name mappings as primary lookup, with manual
  * property conversion rules for block states.
  */
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-import { readFileSync, existsSync } from 'fs';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// ── Load Chunker-derived mappings ──
-let blockData = {};
-try {
-  const p = resolve(__dirname, '..', 'data', 'chunker-mappings.json');
-  if (existsSync(p)) {
-    blockData = JSON.parse(readFileSync(p, 'utf8'));
-  }
-} catch (e) {
-  // Ignore
-}
+import blockData from '../data/chunker-mappings.js';
 
 // ── Constants ──
 const FLIP_DIR = { north: 'south', south: 'north', east: 'west', west: 'east' };
@@ -302,20 +286,6 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
     }
   }
 
-  // ── Step 5: EasyEdit-Data augmentation ──
-  const eeMap = easyEditMapping[javaName];
-  if (eeMap) {
-    if (eeMap.renames) {
-      for (const [oldK, newK] of Object.entries(eeMap.renames)) {
-        if (props[oldK] !== undefined) { props[newK] = String(props[oldK]); delete props[oldK]; }
-      }
-    }
-    if (eeMap.defaults) {
-      for (const [k, v] of Object.entries(eeMap.defaults)) {
-        if (props[k] === undefined) props[k] = String(v);
-      }
-    }
-  }
 
   // ── Step 6: Final cleanup ──
   const stringProps = {};
