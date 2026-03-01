@@ -302,21 +302,6 @@ export function mapBlock(bedrockName, bedrockProps = {}) {
     }
   }
 
-  // ── Step 5: EasyEdit-Data augmentation ──
-  const eeMap = easyEditMapping[javaName];
-  if (eeMap) {
-    if (eeMap.renames) {
-      for (const [oldK, newK] of Object.entries(eeMap.renames)) {
-        if (props[oldK] !== undefined) { props[newK] = String(props[oldK]); delete props[oldK]; }
-      }
-    }
-    if (eeMap.defaults) {
-      for (const [k, v] of Object.entries(eeMap.defaults)) {
-        if (props[k] === undefined) props[k] = String(v);
-      }
-    }
-  }
-
   // ── Step 6: Final cleanup ──
   const stringProps = {};
   for (const [k, v] of Object.entries(props)) {
