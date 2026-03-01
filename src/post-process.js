@@ -9,17 +9,37 @@ const DIR_OFFSETS = {
   'east':  [1, 0, 0]
 };
 
-const REDSTONE_CONNECTABLES = new Set([
-  'minecraft:redstone_wire', 'minecraft:repeater', 'minecraft:comparator',
-  'minecraft:redstone_torch', 'minecraft:redstone_wall_torch',
-  'minecraft:redstone_block', 'minecraft:observer', 'minecraft:lever',
-  'minecraft:stone_button', 'minecraft:oak_button', 'minecraft:daylight_detector',
-  'minecraft:piston', 'minecraft:sticky_piston', 'minecraft:dispenser',
-  'minecraft:dropper', 'minecraft:hopper', 'minecraft:note_block',
-  'minecraft:redstone_lamp', 'minecraft:target', 'minecraft:tripwire_hook'
-]);
+import { readFileSync, existsSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-function isRedstoneConnectable(name) {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+let REDSTONE_CONNECTABLES = new Set();
+try {
+  const p = resolve(__dirname, '..', 'data', 'chunker-mappings.json');
+  if (existsSync(p)) {
+    const d = JSON.parse(readFileSync(p, 'utf8'));
+    if (d.redstoneConnectables) {
+      REDSTONE_CONNECTABLES = new Set(d.redstoneConnectables);
+    }
+  }
+} catch (e) { /* ignore */ }
+
+function isRedstoneConnectable(name, props, dx, dz) {
+  if (name === 'minecraft:redstone_wire') return true;
+
+  // Directional blocks (repeaters, comparators, observers) only connect on their axis
+  if (name === 'minecraft:repeater' || name === 'minecraft:comparator' || name === 'minecraft:observer') {
+    const facing = props?.facing;
+    // dx !== 0 means the block is East or West of the dust. True if the block is on the X axis (facing east or west)
+    if (dx !== 0 && (facing === 'east' || facing === 'west')) return true;
+    // dz !== 0 means the block is North or South of the dust. True if the block is on the Z axis (facing north or south)
+    if (dz !== 0 && (facing === 'north' || facing === 'south')) return true;
+    return false;
+  }
+
   if (REDSTONE_CONNECTABLES.has(name)) return true;
   if (name.includes('button') || name.includes('pressure_plate') || name.includes('trapdoor') || name.includes('door') || name.includes('rail')) return true;
   return false;
@@ -55,10 +75,10 @@ export function postProcessBlocks(blocks, palette) {
 
   const modifiedBlocks = [...blocks];
 
-  const getBlockNameAt = (x, y, z) => {
+  const getBlockAt = (x, y, z) => {
     const idx = posMap.get(`${x},${y},${z}`);
     if (idx === undefined) return null;
-    return modifiedPalette[modifiedBlocks[idx].state]?.Name;
+    return modifiedPalette[modifiedBlocks[idx].state];
   };
 
   for (let i = 0; i < blocks.length; i++) {
@@ -90,23 +110,35 @@ export function postProcessBlocks(blocks, palette) {
       const newProps = { ...origProps };
 
       const checkDir = (dx, dz) => {
-        const sideName = getBlockNameAt(hx + dx, hy, hz + dz);
-        if (sideName && isRedstoneConnectable(sideName)) return 'side';
-        if (sideName === 'minecraft:redstone_wire') return 'side';
+        const sideBlock = getBlockAt(hx + dx, hy, hz + dz);
+        if (sideBlock && isRedstoneConnectable(sideBlock.Name, sideBlock.Properties, dx, dz)) return 'side';
 
-        const upName = getBlockNameAt(hx + dx, hy + 1, hz + dz);
-        if (upName === 'minecraft:redstone_wire') return 'up';
+        const upBlock = getBlockAt(hx + dx, hy + 1, hz + dz);
+        if (upBlock && upBlock.Name === 'minecraft:redstone_wire') return 'up';
 
-        const downName = getBlockNameAt(hx + dx, hy - 1, hz + dz);
-        if (downName === 'minecraft:redstone_wire') return 'side';
+        const downBlock = getBlockAt(hx + dx, hy - 1, hz + dz);
+        if (downBlock && downBlock.Name === 'minecraft:redstone_wire') return 'side';
 
         return 'none';
       };
 
-      const north = checkDir(0, -1);
-      const south = checkDir(0, 1);
-      const east = checkDir(1, 0);
-      const west = checkDir(-1, 0);
+      let north = checkDir(0, -1);
+      let south = checkDir(0, 1);
+      let east = checkDir(1, 0);
+      let west = checkDir(-1, 0);
+
+      // Fix half-lines: if a wire has only one connection on an axis and NO perpendicular connections,
+      // it should draw as a straight line across the block.
+      const hasNs = north !== 'none' || south !== 'none';
+      const hasEw = east !== 'none' || west !== 'none';
+
+      if (hasNs && !hasEw) {
+        if (north === 'none') north = 'side';
+        if (south === 'none') south = 'side';
+      } else if (hasEw && !hasNs) {
+        if (east === 'none') east = 'side';
+        if (west === 'none') west = 'side';
+      }
 
       newProps.north = north;
       newProps.south = south;

@@ -91,6 +91,22 @@ for (const fb of flattenBlocks) {
   }
 }
 
+// ── 1.5 Extract REDSTONE_CONNECTABLE from ChunkerVanillaBlockGroups.java ──
+const groupsPath = path.join(chunkerDir, 'cli/src/main/java/com/hivemc/chunker/conversion/intermediate/column/chunk/identifier/type/block/ChunkerVanillaBlockGroups.java');
+const groupsSrc = fs.readFileSync(groupsPath, 'utf8');
+
+const redstoneConnectables = [];
+const redstoneGroupRegex = /public static final Set<ChunkerBlockType> REDSTONE_CONNECTABLE = Set\.of\(([\s\S]*?)\);/;
+const groupMatch = redstoneGroupRegex.exec(groupsSrc);
+if (groupMatch) {
+  const innerContent = groupMatch[1];
+  const typeRegex = /ChunkerVanillaBlockType\.([A-Z_]+)/g;
+  let tMatch;
+  while ((tMatch = typeRegex.exec(innerContent)) !== null) {
+    redstoneConnectables.push(enumToJavaName(tMatch[1]));
+  }
+}
+
 // ── 2. Build compact output format ──
 
 // Separate simple name mappings from conditional ones
@@ -121,7 +137,9 @@ const output = {
   // Simple 1:1 name mappings (only where names differ)
   names: simpleMappings,
   // Conditional mappings: bedrock_name → { state_key → { state_val → java_name } }
-  flatten: conditionalMappings
+  flatten: conditionalMappings,
+  // List of java names that redstone wire visually connects to
+  redstoneConnectables: redstoneConnectables
 };
 
 const outputPath = path.resolve('data/chunker-mappings.json');
