@@ -51,6 +51,25 @@ const result = await convertMcstructureBuffer(buffer);
 // result.nbt → gzipped Java Structure NBT (Buffer)
 ```
 
+### 内部低レベル API (カスタムパース等)
+
+独自のチャンクループなどを実装したい開発者向けに、サブチャンクのみの解読やNBTバッファの構築を行う低レイヤーAPIも公開しています。
+
+```javascript
+import { parseSubChunk, buildStructureNbt } from 'bedrock-nbt-converter';
+
+// 1. Bedrock LevelDB から読みだした生の Value (Buffer) を渡す
+const decodedChunk = parseSubChunk(rawSubChunkBuffer);
+// { palette: [{ name: 'minecraft:stone', properties: {} }], blocks: Uint16Array(4096) }
+
+// 2. 任意のサイズとブロック情報から Java Structure NBT を構築
+const nbtBuffer = buildStructureNbt({
+  size: [10, 10, 10],
+  palette: [ { Name: "minecraft:stone" } ],
+  blocks: [ { pos: [0, 0, 0], state: 0 } ]
+});
+```
+
 ### ブロックマッピング単体利用
 
 ```javascript
