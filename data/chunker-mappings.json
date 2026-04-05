@@ -2,7 +2,7 @@
   "_meta": {
     "source": "HiveGamesOSS/Chunker",
     "file": "BedrockBlockIdentifierResolver.java",
-    "generated": "2026-03-29T00:08:22.893Z",
+    "generated": "2026-04-05T00:08:18.326Z",
     "description": "Bedrock → Java block name mappings extracted from Chunker source"
   },
   "names": {
@@ -51,6 +51,7 @@
     "minecraft:stickypistonarmcollision": "minecraft:piston_head",
     "minecraft:light_block": "minecraft:light",
     "minecraft:blackstone_double_slab": "minecraft:blackstone_slab",
+    "minecraft:chain": "minecraft:iron_chain",
     "minecraft:crimson_double_slab": "minecraft:crimson_slab",
     "minecraft:lodestone_block": "minecraft:lodestone",
     "minecraft:polished_blackstone_brick_double_slab": "minecraft:polished_blackstone_brick_slab",
@@ -107,7 +108,6 @@
     "minecraft:pale_oak_standing_sign": "minecraft:pale_oak_sign",
     "minecraft:resin_brick_double_slab": "minecraft:resin_brick_slab",
     "minecraft:copper_torch": "minecraft:copper_wall_torch",
-    "minecraft:iron_chain": "minecraft:chain",
     "minecraft:pumpkin_stem": "minecraft:attached_pumpkin_stem",
     "minecraft:melon_stem": "minecraft:attached_melon_stem",
     "minecraft:golden_rail": "minecraft:powered_rail",
@@ -192,8 +192,7 @@
     "minecraft:creeper_head": "minecraft:creeper_wall_head",
     "minecraft:wither_skeleton_skull": "minecraft:wither_skeleton_wall_skull",
     "minecraft:dragon_head": "minecraft:dragon_wall_head",
-    "minecraft:piglin_head": "minecraft:piglin_wall_head",
-    "minecraft:copper_golem_statue": "minecraft:copper_golem"
+    "minecraft:piglin_head": "minecraft:piglin_wall_head"
   },
   "flatten": {
     "minecraft:anvil": {
