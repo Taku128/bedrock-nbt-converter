@@ -2,7 +2,7 @@
   "_meta": {
     "source": "HiveGamesOSS/Chunker",
     "file": "BedrockBlockIdentifierResolver.java",
-    "generated": "2026-04-19T00:10:52.941Z",
+    "generated": "2026-04-26T00:13:12.677Z",
     "description": "Bedrock → Java block name mappings extracted from Chunker source"
   },
   "names": {
@@ -108,6 +108,12 @@
     "minecraft:pale_oak_standing_sign": "minecraft:pale_oak_sign",
     "minecraft:resin_brick_double_slab": "minecraft:resin_brick_slab",
     "minecraft:copper_torch": "minecraft:copper_wall_torch",
+    "minecraft:cinnabar_double_slab": "minecraft:cinnabar_slab",
+    "minecraft:polished_cinnabar_double_slab": "minecraft:polished_cinnabar_slab",
+    "minecraft:cinnabar_brick_double_slab": "minecraft:cinnabar_brick_slab",
+    "minecraft:sulfur_double_slab": "minecraft:sulfur_slab",
+    "minecraft:polished_sulfur_double_slab": "minecraft:polished_sulfur_slab",
+    "minecraft:sulfur_brick_double_slab": "minecraft:sulfur_brick_slab",
     "minecraft:pumpkin_stem": "minecraft:attached_pumpkin_stem",
     "minecraft:melon_stem": "minecraft:attached_melon_stem",
     "minecraft:golden_rail": "minecraft:powered_rail",
