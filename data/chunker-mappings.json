@@ -2,7 +2,7 @@
   "_meta": {
     "source": "HiveGamesOSS/Chunker",
     "file": "BedrockBlockIdentifierResolver.java",
-    "generated": "2026-08-02T01:27:21.427Z",
+    "generated": "2026-08-09T00:45:33.067Z",
     "description": "Bedrock → Java block name mappings extracted from Chunker source"
   },
   "names": {
@@ -114,6 +114,24 @@
     "minecraft:sulfur_double_slab": "minecraft:sulfur_slab",
     "minecraft:polished_sulfur_double_slab": "minecraft:polished_sulfur_slab",
     "minecraft:sulfur_brick_double_slab": "minecraft:sulfur_brick_slab",
+    "minecraft:poplar_double_slab": "minecraft:poplar_slab",
+    "minecraft:poplar_standing_sign": "minecraft:poplar_sign",
+    "minecraft:white_wool_double_slab": "minecraft:white_wool_slab",
+    "minecraft:orange_wool_double_slab": "minecraft:orange_wool_slab",
+    "minecraft:magenta_wool_double_slab": "minecraft:magenta_wool_slab",
+    "minecraft:light_blue_wool_double_slab": "minecraft:light_blue_wool_slab",
+    "minecraft:yellow_wool_double_slab": "minecraft:yellow_wool_slab",
+    "minecraft:lime_wool_double_slab": "minecraft:lime_wool_slab",
+    "minecraft:pink_wool_double_slab": "minecraft:pink_wool_slab",
+    "minecraft:gray_wool_double_slab": "minecraft:gray_wool_slab",
+    "minecraft:light_gray_wool_double_slab": "minecraft:light_gray_wool_slab",
+    "minecraft:cyan_wool_double_slab": "minecraft:cyan_wool_slab",
+    "minecraft:purple_wool_double_slab": "minecraft:purple_wool_slab",
+    "minecraft:blue_wool_double_slab": "minecraft:blue_wool_slab",
+    "minecraft:brown_wool_double_slab": "minecraft:brown_wool_slab",
+    "minecraft:green_wool_double_slab": "minecraft:green_wool_slab",
+    "minecraft:red_wool_double_slab": "minecraft:red_wool_slab",
+    "minecraft:black_wool_double_slab": "minecraft:black_wool_slab",
     "minecraft:pumpkin_stem": "minecraft:attached_pumpkin_stem",
     "minecraft:melon_stem": "minecraft:attached_melon_stem",
     "minecraft:golden_rail": "minecraft:powered_rail",
@@ -403,6 +421,12 @@
       "torch_facing_direction": {
         "top": "minecraft:copper_torch",
         "unknown": "minecraft:copper_torch"
+      }
+    },
+    "minecraft:poplar_hanging_sign": {
+      "hanging": {
+        "false": "minecraft:poplar_wall_hanging_sign",
+        "true": "minecraft:poplar_hanging_sign"
       }
     },
     "minecraft:leaves2": {
@@ -911,6 +935,9 @@
     "minecraft:oak_shelf",
     "minecraft:pale_oak_shelf",
     "minecraft:spruce_shelf",
-    "minecraft:warped_shelf"
+    "minecraft:warped_shelf",
+    "minecraft:poplar_pressure_plate",
+    "minecraft:poplar_button",
+    "minecraft:poplar_shelf"
   ]
 }
